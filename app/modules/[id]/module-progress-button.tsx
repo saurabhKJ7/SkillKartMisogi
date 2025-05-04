@@ -5,7 +5,6 @@ import { useToast } from "@/components/ui/use-toast"
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
-import { updateUserStats } from "@/app/lib/badge-service"
 
 interface ModuleProgressButtonProps {
   userId: string
@@ -122,7 +121,7 @@ export function ModuleProgressButton({
             comments_made: currentStats?.comments_made || 0,
             consecutive_days: currentStats?.consecutive_days || 0,
             perfect_weeks: currentStats?.perfect_weeks || 0
-          })
+          }, { onConflict: "user_id" })
 
         if (statsError) {
           throw statsError
