@@ -73,7 +73,7 @@ export default function ExploreRoadmapsPage() {
           modules:modules(count),
           enrolled:user_roadmaps(count)
         `)
-        .not("id", "in", userRoadmapIds) // Exclude user's enrolled roadmaps
+        .not("id", "in", `(${userRoadmapIds.join(",")})`) // Exclude user's enrolled roadmaps
         .limit(6)
 
       // Get all roadmaps with additional data
@@ -84,7 +84,7 @@ export default function ExploreRoadmapsPage() {
           modules:modules(count),
           enrolled:user_roadmaps(count)
         `)
-        .not("id", "in", userRoadmapIds) // Exclude user's enrolled roadmaps
+        .not("id", "in", `(${userRoadmapIds.join(",")})`) // Exclude user's enrolled roadmaps
         .order(sortBy === "newest" ? "created_at" : "title", { ascending: sortBy === "newest" ? false : true })
 
       if (recommended) {
